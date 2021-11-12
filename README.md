@@ -39,8 +39,32 @@ followed by any number of alphanumeric characters.
 
 ### PRAKTIKUM_1
 
+Start from the EBNF for the description of the syntax of WHILE0 programs from task 3 of the 
+Lab 0 and implement it in javaCC.
+
+* Create a .jj JavaCC file and insert the defined TOKENS and EBNF Regex rules
+* Write a main method inside of the .jj file to parse a given program
+* Read a example program from a textfile and check if the program can be parse by the parser
+
+
 
 ### PRAKTIKUM_2
+
+In this experiment, you are to build on practical experiment 1 and develop a complete compiler for 
+"WHILE0- to URM source code".  
+This URM source code should be executable in the URM Simulator (see download area in ILIAS, 
+"Organizational issues and tools/"). The URM Simulator assumes, 
+that the URM source code does not contain any line numbers (these are implicitly set by the URM Simulator) and that only a finite number of lines is available. 
+) and that only a finite, non-empty sequence of instructions follows (program memory). 
+The compiler for "WHILE0- to URM source code" to be developed here is to be implemented according to these 
+criteria.
+
+* expand the EBNF rules according the WHILE0 syntax
+* generate URM register access for all WHILE0 statements
+* create Exceptions
+* save generated URM program by the WHILE0 parser as new URM program without line-numbers
+
+
 
 ## SETUP
 
