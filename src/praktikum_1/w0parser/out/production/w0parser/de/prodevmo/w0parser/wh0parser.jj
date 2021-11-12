@@ -1,0 +1,93 @@
+PARSER_BEGIN(wh0parser)
+package de.prodevmo.w0parser;
+import java.io.*;
+/** Simple brace matcher. */
+public class wh0parser {
+    static wh0parser wh0parser_instance= null;
+  /** Main entry point. */
+  public static String parse(FileInputStream _fis_instance) throws ParseException, FileNotFoundException {
+        if(wh0parser_instance == null){
+            wh0parser_instance = new wh0parser(_fis_instance);
+        }else{
+            wh0parser_instance.ReInit(_fis_instance);
+        }
+
+       try{
+           wh0parser_instance.program();
+       }catch (Exception e){
+           return e.toString();
+       }
+       return null;
+  }
+
+}
+
+PARSER_END(wh0parser)
+
+TOKEN :
+{
+	< IN: "in" > |
+	< OUT: "out"> |
+	< VAR: "var"> |
+	< ASSIGN: "=" > |
+	< PLUS: "+" > |
+	< ZERO: "0" > |
+	< ONE: "1" > |
+	< NE: "!=" > |
+	< WHILE: "while" > |
+	< DO: "do" > |
+	< BEGIN: "begin" > |
+	< END: "end" > |
+	< SEMICOLON: ";" > |
+	< COMMA: "," > |
+	< LPAREN: "(" > |
+	< RPAREN: ")" > |
+	< IDENT: (["a"-"z","A"-"Z"] (["0"-"9"])?)+ >
+}
+SKIP :
+{
+	" "  |
+	"\t" |
+	"\n" |
+	"\r"
+}
+void program() :
+{}
+{
+	<IDENT> <LPAREN> program_var_in() <SEMICOLON> program_var_out () <RPAREN> <SEMICOLON>
+	<VAR> <LPAREN> var_help() <RPAREN> <SEMICOLON>
+	sequence()
+}
+void program_var_in() :
+{}
+{
+	<IN> <IDENT> (<COMMA> <IDENT>)*
+}
+void program_var_out() :
+{}
+{
+	<OUT> <IDENT>
+}
+void var_help() :
+{}
+{
+	(<IDENT> (<COMMA> <IDENT>)*)*
+}
+void sequence() :
+{}
+{
+	(variable_assign() | while_do()) (<SEMICOLON> sequence())?
+}
+
+void variable_assign() :
+{}
+{
+    //VARx = 0 oder VARx = VARy + 1
+	<IDENT> <ASSIGN> (<ZERO> | <IDENT> <PLUS> <ONE>)
+}
+void while_do() :
+{}
+{
+    //WHILE VARx != VARy DO BEGIN sequcence END
+	<WHILE> <IDENT> <NE> <IDENT> <DO> <BEGIN> sequence() <END>
+}
