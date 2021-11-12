@@ -12,11 +12,10 @@ public class wh0parser {
             wh0parser_instance.ReInit(_fis_instance);
         }
 
-        try{
-            wh0parser_instance.program();
-        }catch (Exception e){
-            return "err";
-        }
+
+        wh0parser_instance.program();
+
+
        return null;
   }
 
