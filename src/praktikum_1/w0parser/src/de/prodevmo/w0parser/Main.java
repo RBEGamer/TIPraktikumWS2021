@@ -6,18 +6,26 @@ import de.prodevmo.w0parser.wh0parser;
 public class Main {
 
 
-    public static void run_wh0program(String fpath) throws FileNotFoundException, ParseException {
+    public static Boolean run_wh0program(String fpath) {
         System.out.println("LOADED PROGRAM = " + fpath);
-        FileInputStream fis = new FileInputStream(fpath);
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(fpath);
+        }catch (Exception e){
+            System.out.println("---- WHILE0 PROGRAM ERROR ----");
+            System.out.println(e.toString());
+            return false;
+        }
 
         //PARSE PROGRAM
-        String parse_result =  wh0parser.parse(fis);
-        //CHECK PARSE RESULT
-        if(parse_result != null){
-            System.out.println("---- WHILE0 PROGRAM ERROR ----");
-            System.out.println(parse_result);
-        }else{
+        try {
+            wh0parser.parse(fis);
             System.out.println("---- WHILE0 PROGRAM OK ----");
+            return true;
+        }catch (Exception e){
+            System.out.println("---- WHILE0 PROGRAM ERROR ----");
+            System.out.println(e.toString());
+            return false;
         }
     }
 
@@ -27,6 +35,10 @@ public class Main {
 
         run_wh0program(BASE_PATH +  "test0.wh0");
         run_wh0program(BASE_PATH +  "test1.wh0");
+        run_wh0program(BASE_PATH +  "test2_err.wh0");
+
+
+
 
     }
 }

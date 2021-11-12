@@ -1,22 +1,22 @@
 PARSER_BEGIN(wh0parser)
 package de.prodevmo.w0parser;
 import java.io.*;
-/** Simple brace matcher. */
+
 public class wh0parser {
     static wh0parser wh0parser_instance= null;
   /** Main entry point. */
-  public static String parse(FileInputStream _fis_instance) throws ParseException, FileNotFoundException {
+  public static String parse(FileInputStream _fis_instance) throws Exception {
         if(wh0parser_instance == null){
             wh0parser_instance = new wh0parser(_fis_instance);
         }else{
             wh0parser_instance.ReInit(_fis_instance);
         }
 
-       try{
-           wh0parser_instance.program();
-       }catch (Exception e){
-           return e.toString();
-       }
+        try{
+            wh0parser_instance.program();
+        }catch (Exception e){
+            return "err";
+        }
        return null;
   }
 
