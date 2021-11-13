@@ -29,13 +29,32 @@ public class Main {
         }
     }
 
+    public static void listFilesForFolder(final File folder) {
+        for (final File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory()) {
+                listFilesForFolder(fileEntry);
+            } else {
+                System.out.println(fileEntry.getName());
+            }
+        }
+    }
+
     public static void main(String args[]) throws FileNotFoundException, ParseException {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         String BASE_PATH = "./resources/wh0programs/";
 
-        run_wh0program(BASE_PATH +  "test0.wh0");
-        run_wh0program(BASE_PATH +  "test1.wh0");
-        run_wh0program(BASE_PATH +  "test2_err.wh0");
+
+        final File folder = new File(BASE_PATH);
+        listFilesForFolder(folder);
+
+        for (File f : folder.listFiles()) {
+            run_wh0program(f.getPath());
+        }
+
+
+        //run_wh0program(BASE_PATH +  "test0.wh0");
+        //run_wh0program(BASE_PATH +  "test1.wh0");
+        //run_wh0program(BASE_PATH +  "test2_err.wh0");
 
 
 

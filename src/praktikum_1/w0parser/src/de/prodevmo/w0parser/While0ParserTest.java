@@ -4,6 +4,7 @@ package de.prodevmo.w0parser;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
@@ -17,8 +18,12 @@ public class While0ParserTest {
         String BASE_PATH = "./resources/wh0programs/";
 
         try {
-            assertTrue(Main.run_wh0program(BASE_PATH +  "test0.wh0"));
-            assertTrue(Main.run_wh0program(BASE_PATH +  "test1.wh0"));
+            final File folder = new File(BASE_PATH);
+            Main.listFilesForFolder(folder);
+
+            for (File f : folder.listFiles()) {
+                Main.run_wh0program(f.getPath());
+            }
         }catch (Exception e){
             fail(e.toString());
         }
