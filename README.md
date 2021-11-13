@@ -19,8 +19,8 @@ The TI praktikum for Theoretische Informatik Master FH Aachen
 ```java
 TEST0(in X1, X2; out Y);
 var();
-Y = 0
-Y = X1 + 1
+Y = 0;
+Y = X1 + 1;
 X2 = 0
 
 ```
