@@ -22,16 +22,16 @@ public class wh0parser implements wh0parserConstants {
 
   static final public void program() throws ParseException {
     jj_consume_token(IDENT);
-    jj_consume_token(LPAREN);
+    jj_consume_token(LEFT_BRACKET_ROUND);
     program_var_in();
     jj_consume_token(SEMICOLON);
     program_var_out();
-    jj_consume_token(RPAREN);
+    jj_consume_token(RIGHT_BRACKET_ROUND);
     jj_consume_token(SEMICOLON);
     jj_consume_token(VAR);
-    jj_consume_token(LPAREN);
+    jj_consume_token(LEFT_BRACKET_ROUND);
     var_help();
-    jj_consume_token(RPAREN);
+    jj_consume_token(RIGHT_BRACKET_ROUND);
     jj_consume_token(SEMICOLON);
     sequence();
 }
@@ -119,7 +119,7 @@ public class wh0parser implements wh0parserConstants {
 
   static final public void variable_assign() throws ParseException {
     jj_consume_token(IDENT);
-    jj_consume_token(ASSIGN);
+    jj_consume_token(EQUALS_ASSIGN);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ZERO:{
       jj_consume_token(ZERO);
@@ -141,7 +141,7 @@ public class wh0parser implements wh0parserConstants {
   static final public void while_do() throws ParseException {
     jj_consume_token(WHILE);
     jj_consume_token(IDENT);
-    jj_consume_token(NE);
+    jj_consume_token(NOTEQUALS);
     jj_consume_token(IDENT);
     jj_consume_token(DO);
     jj_consume_token(BEGIN);

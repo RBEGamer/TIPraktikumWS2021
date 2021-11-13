@@ -17,7 +17,7 @@ public interface wh0parserConstants {
   /** RegularExpression Id. */
   int VAR = 3;
   /** RegularExpression Id. */
-  int ASSIGN = 4;
+  int EQUALS_ASSIGN = 4;
   /** RegularExpression Id. */
   int PLUS = 5;
   /** RegularExpression Id. */
@@ -25,7 +25,7 @@ public interface wh0parserConstants {
   /** RegularExpression Id. */
   int ONE = 7;
   /** RegularExpression Id. */
-  int NE = 8;
+  int NOTEQUALS = 8;
   /** RegularExpression Id. */
   int WHILE = 9;
   /** RegularExpression Id. */
@@ -39,9 +39,9 @@ public interface wh0parserConstants {
   /** RegularExpression Id. */
   int COMMA = 14;
   /** RegularExpression Id. */
-  int LPAREN = 15;
+  int LEFT_BRACKET_ROUND = 15;
   /** RegularExpression Id. */
-  int RPAREN = 16;
+  int RIGHT_BRACKET_ROUND = 16;
   /** RegularExpression Id. */
   int IDENT = 17;
 

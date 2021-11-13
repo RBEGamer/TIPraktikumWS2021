@@ -28,19 +28,19 @@ TOKEN :
 	< IN: "in" > |
 	< OUT: "out"> |
 	< VAR: "var"> |
-	< ASSIGN: "=" > |
+	< EQUALS_ASSIGN: "=" > |
 	< PLUS: "+" > |
 	< ZERO: "0" > |
 	< ONE: "1" > |
-	< NE: "!=" > |
+	< NOTEQUALS: "!=" > |
 	< WHILE: "while" > |
 	< DO: "do" > |
 	< BEGIN: "begin" > |
 	< END: "end" > |
 	< SEMICOLON: ";" > |
 	< COMMA: "," > |
-	< LPAREN: "(" > |
-	< RPAREN: ")" > |
+	< LEFT_BRACKET_ROUND: "(" > |
+	< RIGHT_BRACKET_ROUND: ")" > |
 	< IDENT: (["a"-"z","A"-"Z"] (["0"-"9"])?)+ >
 }
 SKIP :
@@ -53,8 +53,8 @@ SKIP :
 void program() :
 {}
 {
-	<IDENT> <LPAREN> program_var_in() <SEMICOLON> program_var_out () <RPAREN> <SEMICOLON>
-	<VAR> <LPAREN> var_help() <RPAREN> <SEMICOLON>
+	<IDENT> <LEFT_BRACKET_ROUND> program_var_in() <SEMICOLON> program_var_out () <RIGHT_BRACKET_ROUND> <SEMICOLON>
+	<VAR> <LEFT_BRACKET_ROUND> var_help() <RIGHT_BRACKET_ROUND> <SEMICOLON>
 	sequence()
 }
 void program_var_in() :
@@ -82,11 +82,11 @@ void variable_assign() :
 {}
 {
     //VARx = 0 oder VARx = VARy + 1
-	<IDENT> <ASSIGN> (<ZERO> | <IDENT> <PLUS> <ONE>)
+	<IDENT> <EQUALS_ASSIGN> (<ZERO> | <IDENT> <PLUS> <ONE>)
 }
 void while_do() :
 {}
 {
     //WHILE VARx != VARy DO BEGIN sequcence END
-	<WHILE> <IDENT> <NE> <IDENT> <DO> <BEGIN> sequence() <END>
+	<WHILE> <IDENT> <NOTEQUALS> <IDENT> <DO> <BEGIN> sequence() <END>
 }
