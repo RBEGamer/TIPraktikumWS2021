@@ -26,14 +26,13 @@ TOKEN :
 }
 ```
 
-
 # EBNF
 
 
 ```java
 
 // PROGRAM HEADER
-program ::= IDENT LEFT_BRACKET_ROUND program_var_in SEMICOLON program_var_out RIGHT_BRACKET_ROUND SEMICOLON program_var sequence
+program_begin ::= IDENT LEFT_BRACKET_ROUND program_var_in SEMICOLON program_var_out RIGHT_BRACKET_ROUND SEMICOLON program_var sequence
 program_var ::= VAR LEFT_BRACKET_ROUND program_var_help RIGHT_BRACKET_ROUND SEMICOLON
 program_var_help ::= (IDENT (COMMA IDENT)*)?
 program_var_in ::= IN (IDENT (COMMA IDENT)*)?
