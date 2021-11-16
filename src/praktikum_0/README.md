@@ -26,17 +26,6 @@ TOKEN :
 }
 ```
 
-## JavaCC SKIP DEFINITION
-
-```java
-SKIP :
-{
-	" "  |
-	"\t" |
-	"\n" |
-	"\r"
-}
-```
 
 # EBNF
 
