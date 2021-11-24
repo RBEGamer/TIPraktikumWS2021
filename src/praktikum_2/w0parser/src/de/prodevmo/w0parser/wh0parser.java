@@ -44,6 +44,7 @@ whi.urmbi.set_program_name(t.image);
     var_help();
     jj_consume_token(RIGHT_BRACKET_ROUND);
     jj_consume_token(SEMICOLON);
+whi.urmbi.insert_comment("##############################");
     sequence();
 }
 
@@ -133,18 +134,22 @@ whi.urmbi.reg_reg(t.image);
     }
 }
 
-  static final public void variable_assign() throws ParseException {
-    jj_consume_token(IDENT);
+  static final public void variable_assign() throws ParseException {Token left_token;
+    Token right_token;
+    //VARx = 0 oder VARx = VARy + 1
+            left_token = jj_consume_token(IDENT);
     jj_consume_token(EQUALS_ASSIGN);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ZERO:{
       jj_consume_token(ZERO);
+whi.urmbi.assignment(left_token.image, 0);
       break;
       }
     case IDENT:{
-      jj_consume_token(IDENT);
+      right_token = jj_consume_token(IDENT);
       jj_consume_token(PLUS);
       jj_consume_token(ONE);
+whi.urmbi.assignment(left_token.image, right_token.image, 1);
       break;
       }
     default:

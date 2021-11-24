@@ -71,6 +71,7 @@ void program() :
 {
 	t = <IDENT> {whi.urmbi.set_program_name(t.image);} <LEFT_BRACKET_ROUND> program_var_in() <SEMICOLON> program_var_out () <RIGHT_BRACKET_ROUND> <SEMICOLON>
 	<VAR> <LEFT_BRACKET_ROUND> var_help() <RIGHT_BRACKET_ROUND> <SEMICOLON>
+	{whi.urmbi.insert_comment("##############################");}
 	sequence()
 }
 void program_var_in() :
@@ -109,7 +110,7 @@ void variable_assign() :
  }
 {
     //VARx = 0 oder VARx = VARy + 1
-	<IDENT> <EQUALS_ASSIGN> (<ZERO> | <IDENT> <PLUS> <ONE>)
+	left_token = <IDENT> <EQUALS_ASSIGN>(<ZERO>{ whi.urmbi.assignment(left_token.image, 0);} | right_token=<IDENT> <PLUS> <ONE>{ whi.urmbi.assignment(left_token.image, right_token.image, 1);})
 }
 void while_do() :
 {}
