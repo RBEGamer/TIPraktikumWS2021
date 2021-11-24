@@ -1,0 +1,92 @@
+PARSER_BEGIN(wh0parser)
+package de.prodevmo.w0parser;
+import java.io.*;
+
+public class wh0parser {
+    static wh0parser wh0parser_instance= null;
+  /** Main entry point. */
+  public static String parse(FileInputStream _fis_instance) throws Exception {
+        if(wh0parser_instance == null){
+            wh0parser_instance = new wh0parser(_fis_instance);
+        }else{
+            wh0parser_instance.ReInit(_fis_instance);
+        }
+
+
+        wh0parser_instance.program();
+
+
+       return null;
+  }
+
+}
+
+PARSER_END(wh0parser)
+
+TOKEN :
+{
+	< IN: "in" > |
+	< OUT: "out"> |
+	< VAR: "var"> |
+	< EQUALS_ASSIGN: "=" > |
+	< PLUS: "+" > |
+	< ZERO: "0" > |
+	< ONE: "1" > |
+	< NOTEQUALS: "!=" > |
+	< WHILE: "while" > |
+	< DO: "do" > |
+	< BEGIN: "begin" > |
+	< END: "end" > |
+	< SEMICOLON: ";" > |
+	< COMMA: "," > |
+	< LEFT_BRACKET_ROUND: "(" > |
+	< RIGHT_BRACKET_ROUND: ")" > |
+	< IDENT: (["a"-"z","A"-"Z"] (["0"-"9"])?)+ >
+}
+SKIP :
+{
+	" "  |
+	"\t" |
+	"\n" |
+	"\r"
+}
+void program() :
+{}
+{
+	<IDENT> <LEFT_BRACKET_ROUND> program_var_in() <SEMICOLON> program_var_out () <RIGHT_BRACKET_ROUND> <SEMICOLON>
+	<VAR> <LEFT_BRACKET_ROUND> var_help() <RIGHT_BRACKET_ROUND> <SEMICOLON>
+	sequence()
+}
+void program_var_in() :
+{}
+{
+	<IN> <IDENT> (<COMMA> <IDENT>)*
+}
+void program_var_out() :
+{}
+{
+	<OUT> <IDENT>
+}
+void var_help() :
+{}
+{
+	(<IDENT> (<COMMA> <IDENT>)*)*
+}
+void sequence() :
+{}
+{
+	(variable_assign() | while_do()) (<SEMICOLON> sequence())?
+}
+
+void variable_assign() :
+{}
+{
+    //VARx = 0 oder VARx = VARy + 1
+	<IDENT> <EQUALS_ASSIGN> (<ZERO> | <IDENT> <PLUS> <ONE>)
+}
+void while_do() :
+{}
+{
+    //WHILE VARx != VARy DO BEGIN sequcence END
+	<WHILE> <IDENT> <NOTEQUALS> <IDENT> <DO> <BEGIN> sequence() <END>
+}
