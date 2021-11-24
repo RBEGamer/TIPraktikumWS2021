@@ -113,8 +113,11 @@ void variable_assign() :
 	left_token = <IDENT> <EQUALS_ASSIGN>(<ZERO>{ whi.urmbi.assignment(left_token.image, 0);} | right_token=<IDENT> <PLUS> <ONE>{ whi.urmbi.assignment(left_token.image, right_token.image, 1);})
 }
 void while_do() :
-{}
+{
+    Token left_token;
+    Token right_token;
+ }
 {
     //WHILE VARx != VARy DO BEGIN sequcence END
-	<WHILE> <IDENT> <NOTEQUALS> <IDENT> <DO> <BEGIN> sequence() <END>
+	<WHILE> left_token=<IDENT> <NOTEQUALS> right_token=<IDENT> <DO> <BEGIN>{whi.urmbi.while_ne_begin(left_token.image, right_token.image);} sequence() <END>{whi.urmbi.while_end();}
 }

@@ -150,9 +150,17 @@ public class URMBuilder {
     }
 
 
+    public void while_ne_begin(String _l_ident, String _r_ident){
+        while_begin(_l_ident,_r_ident, URMTypeDef.WHILE_TYPE.NOT_EQUAL);
+    }
 
+    public void while_begin(String _l_ident, String _r_ident, URMTypeDef.WHILE_TYPE _type){
+        //STORE WHILE BEGIN SPRUNGMARKE
+    }
 
-
+    public void while_end(){
+        //REPLACE MARKE
+    }
 
 
     public void write_urm_to_file(String _basepath) throws URMGeneratorExceptionWriteOut {

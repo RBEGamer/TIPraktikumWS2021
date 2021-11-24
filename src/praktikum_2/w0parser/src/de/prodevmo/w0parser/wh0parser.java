@@ -159,15 +159,18 @@ whi.urmbi.assignment(left_token.image, right_token.image, 1);
     }
 }
 
-  static final public void while_do() throws ParseException {
+  static final public void while_do() throws ParseException {Token left_token;
+    Token right_token;
     jj_consume_token(WHILE);
-    jj_consume_token(IDENT);
+    left_token = jj_consume_token(IDENT);
     jj_consume_token(NOTEQUALS);
-    jj_consume_token(IDENT);
+    right_token = jj_consume_token(IDENT);
     jj_consume_token(DO);
     jj_consume_token(BEGIN);
+whi.urmbi.while_ne_begin(left_token.image, right_token.image);
     sequence();
     jj_consume_token(END);
+whi.urmbi.while_end();
 }
 
   static private boolean jj_initialized_once = false;

@@ -9,4 +9,7 @@ public class URMTypeDef {
         IDENT
     }
 
+    public enum WHILE_TYPE{
+        NOT_EQUAL
+    }
 }
