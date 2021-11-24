@@ -1,29 +1,39 @@
-options
-{
-	STATIC = false;
-}
 PARSER_BEGIN(wh0parser)
 package de.prodevmo.w0parser;
 import java.io.*;
 
+//import de.prodevmo.*;
+
 public class wh0parser {
-    static wh0parser wh0parser_instance= null;
-  /** Main entry point. */
-  public static String parse(FileInputStream _fis_instance) throws Exception {
-        if(wh0parser_instance == null){
-            wh0parser_instance = new wh0parser(_fis_instance);
+    static wh0parser whi= null;
+    public URMBuilder urmbi = null;
+
+    /** Main entry point. */
+  public static String parse(FileInputStream _fis_instance, String _urm_output_path) throws Exception {
+        if(whi == null){
+            whi = new wh0parser(_fis_instance);
         }else{
-            wh0parser_instance.ReInit(_fis_instance);
+            ReInit(_fis_instance);
         }
 
+        if(whi.urmbi == null){
+            whi.urmbi = new URMBuilder();
+        }
 
-        wh0parser_instance.program();
+        wh0parser.program();
 
-
+        //WRITE URM PROGRAM TO FILE IF PATH IS GIVEN
+        if(_urm_output_path != null){
+            whi.urmbi.write_urm_to_file(_urm_output_path);
+        }
        return null;
   }
 
+
+
+
 }
+
 
 PARSER_END(wh0parser)
 
@@ -55,9 +65,11 @@ SKIP :
 	"\r"
 }
 void program() :
-{}
 {
-	<IDENT> <LEFT_BRACKET_ROUND> program_var_in() <SEMICOLON> program_var_out () <RIGHT_BRACKET_ROUND> <SEMICOLON>
+ Token t;
+ }
+{
+	t = <IDENT> {whi.urmbi.set_program_name(t.image);} <LEFT_BRACKET_ROUND> program_var_in() <SEMICOLON> program_var_out () <RIGHT_BRACKET_ROUND> <SEMICOLON>
 	<VAR> <LEFT_BRACKET_ROUND> var_help() <RIGHT_BRACKET_ROUND> <SEMICOLON>
 	sequence()
 }

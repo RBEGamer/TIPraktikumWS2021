@@ -15,14 +15,15 @@ public class While0ParserTest {
     @DisplayName("while0_noerror")
     public void while0_noerror() {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        String BASE_PATH = "./resources/wh0programs/";
+        final String BASE_PATH = "./resources/wh0programs/";
+        final String URM_BASE_PATH = "./resources/urm_programs/";
 
         try {
             final File folder = new File(BASE_PATH);
             Main.listFilesForFolder(folder);
 
             for (File f : folder.listFiles()) {
-                Main.run_wh0program(f.getPath());
+                Main.run_wh0program(f.getPath(), URM_BASE_PATH);
             }
         }catch (Exception e){
             fail(e.toString());
