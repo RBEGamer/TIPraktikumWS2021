@@ -74,19 +74,25 @@ void program() :
 	sequence()
 }
 void program_var_in() :
-{}
 {
-	<IN> <IDENT> (<COMMA> <IDENT>)*
+ Token t;
+ }
+{
+	<IN> (t= <IDENT>{ whi.urmbi.reg_reg_in(t.image); }) (<COMMA>  t =<IDENT>{whi.urmbi.reg_reg_in(t.image);})*
 }
 void program_var_out() :
-{}
 {
-	<OUT> <IDENT>
+Token t;
+}
+{
+	<OUT> (t = <IDENT> {whi.urmbi.reg_reg_out(t.image);})
 }
 void var_help() :
-{}
 {
-	(<IDENT> (<COMMA> <IDENT>)*)*
+Token t;
+}
+{
+	(t=<IDENT>{whi.urmbi.reg_reg(t.image);} (<COMMA> t=<IDENT>{whi.urmbi.reg_reg(t.image);})*)*
 }
 void sequence() :
 {}
@@ -94,8 +100,13 @@ void sequence() :
 	(variable_assign() | while_do()) (<SEMICOLON> sequence())?
 }
 
+
+
 void variable_assign() :
-{}
+{
+    Token left_token;
+    Token right_token;
+ }
 {
     //VARx = 0 oder VARx = VARy + 1
 	<IDENT> <EQUALS_ASSIGN> (<ZERO> | <IDENT> <PLUS> <ONE>)

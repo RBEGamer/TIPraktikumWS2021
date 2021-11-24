@@ -1,0 +1,5 @@
+ADD(in X1; out Y);
+var(H1,H2);
+H1 = 0;
+H1 = X1 + 1;
+Y = H1 + 1

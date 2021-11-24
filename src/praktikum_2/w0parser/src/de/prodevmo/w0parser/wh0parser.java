@@ -47,9 +47,10 @@ whi.urmbi.set_program_name(t.image);
     sequence();
 }
 
-  static final public void program_var_in() throws ParseException {
+  static final public void program_var_in() throws ParseException {Token t;
     jj_consume_token(IN);
-    jj_consume_token(IDENT);
+    t = jj_consume_token(IDENT);
+whi.urmbi.reg_reg_in(t.image);
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -62,16 +63,18 @@ whi.urmbi.set_program_name(t.image);
         break label_1;
       }
       jj_consume_token(COMMA);
-      jj_consume_token(IDENT);
+      t = jj_consume_token(IDENT);
+whi.urmbi.reg_reg_in(t.image);
     }
 }
 
-  static final public void program_var_out() throws ParseException {
+  static final public void program_var_out() throws ParseException {Token t;
     jj_consume_token(OUT);
-    jj_consume_token(IDENT);
+    t = jj_consume_token(IDENT);
+whi.urmbi.reg_reg_out(t.image);
 }
 
-  static final public void var_help() throws ParseException {
+  static final public void var_help() throws ParseException {Token t;
     label_2:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -83,7 +86,8 @@ whi.urmbi.set_program_name(t.image);
         jj_la1[1] = jj_gen;
         break label_2;
       }
-      jj_consume_token(IDENT);
+      t = jj_consume_token(IDENT);
+whi.urmbi.reg_reg(t.image);
       label_3:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -96,7 +100,8 @@ whi.urmbi.set_program_name(t.image);
           break label_3;
         }
         jj_consume_token(COMMA);
-        jj_consume_token(IDENT);
+        t = jj_consume_token(IDENT);
+whi.urmbi.reg_reg(t.image);
       }
     }
 }

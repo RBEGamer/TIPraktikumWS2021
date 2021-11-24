@@ -35,7 +35,7 @@ public class Main {
             if (fileEntry.isDirectory()) {
                 listFilesForFolder(fileEntry);
             } else {
-                System.out.println(fileEntry.getName());
+                //System.out.println(fileEntry.getName());
             }
         }
     }
@@ -49,11 +49,11 @@ public class Main {
         listFilesForFolder(folder);
 
         for (File f : folder.listFiles()) {
-            run_wh0program(f.getPath(), URM_OUT_BASE_PATH);
+      //      run_wh0program(f.getPath(), URM_OUT_BASE_PATH);
         }
 
 
-        //run_wh0program(BASE_PATH +  "test0.wh0");
+        run_wh0program(BASE_PATH +  "test0.wh0", URM_OUT_BASE_PATH);
         //run_wh0program(BASE_PATH +  "test1.wh0");
         //run_wh0program(BASE_PATH +  "test2_err.wh0");
 
