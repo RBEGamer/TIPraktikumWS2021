@@ -20,7 +20,7 @@ public class wh0parser implements wh0parserConstants {
        return null;
   }
 
-  static final public void program() throws ParseException {
+  final public void program() throws ParseException {
     jj_consume_token(IDENT);
     jj_consume_token(LEFT_BRACKET_ROUND);
     program_var_in();
@@ -36,7 +36,7 @@ public class wh0parser implements wh0parserConstants {
     sequence();
 }
 
-  static final public void program_var_in() throws ParseException {
+  final public void program_var_in() throws ParseException {
     jj_consume_token(IN);
     jj_consume_token(IDENT);
     label_1:
@@ -55,12 +55,12 @@ public class wh0parser implements wh0parserConstants {
     }
 }
 
-  static final public void program_var_out() throws ParseException {
+  final public void program_var_out() throws ParseException {
     jj_consume_token(OUT);
     jj_consume_token(IDENT);
 }
 
-  static final public void var_help() throws ParseException {
+  final public void var_help() throws ParseException {
     label_2:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -90,7 +90,7 @@ public class wh0parser implements wh0parserConstants {
     }
 }
 
-  static final public void sequence() throws ParseException {
+  final public void sequence() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IDENT:{
       variable_assign();
@@ -117,7 +117,7 @@ public class wh0parser implements wh0parserConstants {
     }
 }
 
-  static final public void variable_assign() throws ParseException {
+  final public void variable_assign() throws ParseException {
     jj_consume_token(IDENT);
     jj_consume_token(EQUALS_ASSIGN);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -138,7 +138,7 @@ public class wh0parser implements wh0parserConstants {
     }
 }
 
-  static final public void while_do() throws ParseException {
+  final public void while_do() throws ParseException {
     jj_consume_token(WHILE);
     jj_consume_token(IDENT);
     jj_consume_token(NOTEQUALS);
@@ -149,17 +149,16 @@ public class wh0parser implements wh0parserConstants {
     jj_consume_token(END);
 }
 
-  static private boolean jj_initialized_once = false;
   /** Generated Token Manager. */
-  static public wh0parserTokenManager token_source;
-  static SimpleCharStream jj_input_stream;
+  public wh0parserTokenManager token_source;
+  SimpleCharStream jj_input_stream;
   /** Current token. */
-  static public Token token;
+  public Token token;
   /** Next token. */
-  static public Token jj_nt;
-  static private int jj_ntk;
-  static private int jj_gen;
-  static final private int[] jj_la1 = new int[6];
+  public Token jj_nt;
+  private int jj_ntk;
+  private int jj_gen;
+  final private int[] jj_la1 = new int[6];
   static private int[] jj_la1_0;
   static {
 	   jj_la1_init_0();
@@ -174,13 +173,6 @@ public class wh0parser implements wh0parserConstants {
   }
   /** Constructor with InputStream and supplied encoding */
   public wh0parser(java.io.InputStream stream, String encoding) {
-	 if (jj_initialized_once) {
-	   System.out.println("ERROR: Second call to constructor of static parser.  ");
-	   System.out.println("	   You must either use ReInit() or set the JavaCC option STATIC to false");
-	   System.out.println("	   during parser generation.");
-	   throw new Error();
-	 }
-	 jj_initialized_once = true;
 	 try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
 	 token_source = new wh0parserTokenManager(jj_input_stream);
 	 token = new Token();
@@ -190,11 +182,11 @@ public class wh0parser implements wh0parserConstants {
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream) {
+  public void ReInit(java.io.InputStream stream) {
 	  ReInit(stream, null);
   }
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream, String encoding) {
+  public void ReInit(java.io.InputStream stream, String encoding) {
 	 try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
 	 token_source.ReInit(jj_input_stream);
 	 token = new Token();
@@ -205,13 +197,6 @@ public class wh0parser implements wh0parserConstants {
 
   /** Constructor. */
   public wh0parser(java.io.Reader stream) {
-	 if (jj_initialized_once) {
-	   System.out.println("ERROR: Second call to constructor of static parser. ");
-	   System.out.println("	   You must either use ReInit() or set the JavaCC option STATIC to false");
-	   System.out.println("	   during parser generation.");
-	   throw new Error();
-	 }
-	 jj_initialized_once = true;
 	 jj_input_stream = new SimpleCharStream(stream, 1, 1);
 	 token_source = new wh0parserTokenManager(jj_input_stream);
 	 token = new Token();
@@ -221,7 +206,7 @@ public class wh0parser implements wh0parserConstants {
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.Reader stream) {
+  public void ReInit(java.io.Reader stream) {
 	if (jj_input_stream == null) {
 	   jj_input_stream = new SimpleCharStream(stream, 1, 1);
 	} else {
@@ -240,13 +225,6 @@ public class wh0parser implements wh0parserConstants {
 
   /** Constructor with generated Token Manager. */
   public wh0parser(wh0parserTokenManager tm) {
-	 if (jj_initialized_once) {
-	   System.out.println("ERROR: Second call to constructor of static parser. ");
-	   System.out.println("	   You must either use ReInit() or set the JavaCC option STATIC to false");
-	   System.out.println("	   during parser generation.");
-	   throw new Error();
-	 }
-	 jj_initialized_once = true;
 	 token_source = tm;
 	 token = new Token();
 	 jj_ntk = -1;
@@ -263,7 +241,7 @@ public class wh0parser implements wh0parserConstants {
 	 for (int i = 0; i < 6; i++) jj_la1[i] = -1;
   }
 
-  static private Token jj_consume_token(int kind) throws ParseException {
+  private Token jj_consume_token(int kind) throws ParseException {
 	 Token oldToken;
 	 if ((oldToken = token).next != null) token = token.next;
 	 else token = token.next = token_source.getNextToken();
@@ -279,7 +257,7 @@ public class wh0parser implements wh0parserConstants {
 
 
 /** Get the next Token. */
-  static final public Token getNextToken() {
+  final public Token getNextToken() {
 	 if (token.next != null) token = token.next;
 	 else token = token.next = token_source.getNextToken();
 	 jj_ntk = -1;
@@ -288,7 +266,7 @@ public class wh0parser implements wh0parserConstants {
   }
 
 /** Get the specific Token. */
-  static final public Token getToken(int index) {
+  final public Token getToken(int index) {
 	 Token t = token;
 	 for (int i = 0; i < index; i++) {
 	   if (t.next != null) t = t.next;
@@ -297,19 +275,19 @@ public class wh0parser implements wh0parserConstants {
 	 return t;
   }
 
-  static private int jj_ntk_f() {
+  private int jj_ntk_f() {
 	 if ((jj_nt=token.next) == null)
 	   return (jj_ntk = (token.next=token_source.getNextToken()).kind);
 	 else
 	   return (jj_ntk = jj_nt.kind);
   }
 
-  static private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
-  static private int[] jj_expentry;
-  static private int jj_kind = -1;
+  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  private int[] jj_expentry;
+  private int jj_kind = -1;
 
   /** Generate ParseException. */
-  static public ParseException generateParseException() {
+  public ParseException generateParseException() {
 	 jj_expentries.clear();
 	 boolean[] la1tokens = new boolean[22];
 	 if (jj_kind >= 0) {
@@ -339,19 +317,19 @@ public class wh0parser implements wh0parserConstants {
 	 return new ParseException(token, exptokseq, tokenImage);
   }
 
-  static private boolean trace_enabled;
+  private boolean trace_enabled;
 
 /** Trace enabled. */
-  static final public boolean trace_enabled() {
+  final public boolean trace_enabled() {
 	 return trace_enabled;
   }
 
   /** Enable tracing. */
-  static final public void enable_tracing() {
+  final public void enable_tracing() {
   }
 
   /** Disable tracing. */
-  static final public void disable_tracing() {
+  final public void disable_tracing() {
   }
 
 }

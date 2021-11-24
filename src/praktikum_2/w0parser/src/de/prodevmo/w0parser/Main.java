@@ -6,7 +6,7 @@ import de.prodevmo.w0parser.wh0parser;
 public class Main {
 
 
-    public static Boolean run_wh0program(String fpath) {
+    public static Boolean run_wh0program(String fpath, String _urm_out_path) {
         System.out.println("LOADED PROGRAM = " + fpath);
         FileInputStream fis = null;
         try {
@@ -19,7 +19,8 @@ public class Main {
 
         //PARSE PROGRAM
         try {
-            wh0parser.parse(fis);
+            wh0parser.parse(fis, _urm_out_path);
+
             System.out.println("---- WHILE0 PROGRAM OK ----");
             return true;
         }catch (Exception e){
@@ -41,14 +42,14 @@ public class Main {
 
     public static void main(String args[]) throws FileNotFoundException, ParseException {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        String BASE_PATH = "./resources/wh0programs/";
-
+        final String BASE_PATH = "./resources/wh0programs/";
+        final String URM_OUT_BASE_PATH = "./resources/urm_programs/";
 
         final File folder = new File(BASE_PATH);
         listFilesForFolder(folder);
 
         for (File f : folder.listFiles()) {
-            run_wh0program(f.getPath());
+            run_wh0program(f.getPath(), URM_OUT_BASE_PATH);
         }
 
 

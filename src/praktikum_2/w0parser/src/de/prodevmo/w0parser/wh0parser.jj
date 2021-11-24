@@ -1,11 +1,20 @@
 PARSER_BEGIN(wh0parser)
 package de.prodevmo.w0parser;
 import java.io.*;
+import de.prodevmo.*;
 
 public class wh0parser {
     static wh0parser wh0parser_instance= null;
-  /** Main entry point. */
-  public static String parse(FileInputStream _fis_instance) throws Exception {
+
+
+    private String program_name = "";
+    private HashMap<String, String > ident_lookup = new HashMap<String, String >();
+    private int used_register_index = 0;
+    private ArrayList<String > program_lines = new ArrayList<String >();
+
+
+    /** Main entry point. */
+  public static String parse(FileInputStream _fis_instance, String _urm_output_path) throws Exception {
         if(wh0parser_instance == null){
             wh0parser_instance = new wh0parser(_fis_instance);
         }else{
@@ -15,8 +24,45 @@ public class wh0parser {
 
         wh0parser_instance.program();
 
-
+        if(urm_output_path != null){
+            wh0parser_instance.write_urm_to_file(_urm_output_path);
+        }
        return null;
+  }
+
+
+  public void write_urm_to_file(String _basepath) throws URMGeneratorExceptionWriteOut{
+      System.out.println("--- WRITE_URM_TO_FILE ---");
+
+
+      if(program_name == null || program_name == ""){
+          throw new URMGeneratorExceptionWriteOut("program_name is not defined");
+      }
+
+      if(program_lines.size() <= 0){
+          throw new URMGeneratorExceptionWriteOut("program has no content or no lines");
+      }
+
+      if(_basepath == null || _basepath == ""){
+          throw new URMGeneratorExceptionWriteOut("output path is empty");
+      }
+
+        if(!_basepath.endsWith('/')){
+            _basepath += "/";
+        }
+        _basepath += program_name.replace(' ', '_').replace('/', '') + ".urm";
+        System.out.println("final pitput path is: " + _basepath);
+
+        try{
+            FileOutputStream fos = new FileOutputStream(_basepath);
+            final PrintStream printStream = new PrintStream(fos);
+            for (String line : program_lines) {
+                printStream.println(line);
+            }
+            printStream.close();
+        }catch (IOException e){
+            throw new URMGeneratorExceptionWriteOut(e.getMessage());
+        }
   }
 
 }

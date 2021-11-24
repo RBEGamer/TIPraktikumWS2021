@@ -1,3 +1,7 @@
+options
+{
+	STATIC = false;
+}
 PARSER_BEGIN(wh0parser)
 package de.prodevmo.w0parser;
 import java.io.*;
