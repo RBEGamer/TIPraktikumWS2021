@@ -1,146 +1,32 @@
 ; ###### MULT ######
 ; REGISTER IDENT X1 => R1
-; REGISTER IDENT X2 => R2
-; REGISTER IDENT Y => R3
-; REGISTER IDENT H1 => R4
-; REGISTER IDENT H2 => R5
+; REGISTER IDENT Y => R2
+; REGISTER IDENT H1 => R3
 ; ##############################
-; WHILE NOT EQUAL WHILE H1[R4] != X1[R4] do begin
-; REGISTER IDENT _HELPERREGISTER_1 => R6
-; REGISTER IDENT _HELPERREGISTER_2 => R7
-R6 = 0
-if R4 == 0 goto 6
-R4--
-R8++
-goto 2
-if R8 == 0 goto 11
-R8--
-R6++
-R4++
-goto 6
-R7 = 0
-if R1 == 0 goto 16
-R1--
-R9++
-goto 12
-if R9 == 0 goto 21
-R9--
-R7++
-R1++
-goto 16
-if R6 == 0 goto 23
-goto 25
-if R7 == 0 goto 123
-goto 29
-if R7 == 0 goto 29
-R6--
-R7--
-goto 21
-; H2[R5] = 0
-R5 = 0
-; WHILE NOT EQUAL WHILE H2[R5] != X2[R5] do begin
-; REGISTER IDENT _HELPERREGISTER_3 => R10
-; REGISTER IDENT _HELPERREGISTER_4 => R11
-R10 = 0
-if R5 == 0 goto 35
-R5--
-R12++
-goto 31
-if R12 == 0 goto 40
-R12--
-R10++
-R5++
-goto 35
-R11 = 0
-if R2 == 0 goto 45
-R2--
-R13++
-goto 41
-if R13 == 0 goto 50
-R13--
-R11++
-R2++
-goto 45
-if R10 == 0 goto 52
-goto 54
-if R11 == 0 goto 101
-goto 58
-if R11 == 0 goto 58
-R10--
-R11--
-goto 50
-; REGISTER IDENT _HELPERREGISTER_5 => R14
-; COPY Y[R3] => Y[R3]
-R14 = 0
-if R3 == 0 goto 63
-R3--
-R15++
-goto 59
-if R15 == 0 goto 68
-R15--
-R14++
-R3++
-goto 63
-; _HELPERREGISTER_5[R14]++
-R14++
+; H1[R3] = 0
 R3 = 0
-if R14 == 0 goto 74
-R14--
-R16++
-goto 70
-if R16 == 0 goto 79
-R16--
-R3++
-R14++
-goto 74
-; REGISTER IDENT _HELPERREGISTER_6 => R17
-; COPY H2[R5] => H2[R5]
-R17 = 0
-if R5 == 0 goto 84
-R5--
-R18++
-goto 80
-if R18 == 0 goto 89
-R18--
-R17++
-R5++
-goto 84
-; _HELPERREGISTER_6[R17]++
-R17++
-R5 = 0
-if R17 == 0 goto 95
-R17--
-R19++
-goto 91
-if R19 == 0 goto 100
-R19--
-R5++
-R17++
-goto 95
-goto 30
-; REGISTER IDENT _HELPERREGISTER_7 => R20
-; COPY H1[R4] => H1[R4]
-R20 = 0
-if R4 == 0 goto 106
-R4--
-R21++
-goto 102
-if R21 == 0 goto 111
-R21--
-R20++
-R4++
-goto 106
-; _HELPERREGISTER_7[R20]++
-R20++
+; REGISTER IDENT _HELPERREGISTER_1 => R4
+; COPY Y[R2] => X1[R1]
 R4 = 0
-if R20 == 0 goto 117
-R20--
-R22++
-goto 113
-if R22 == 0 goto 122
-R22--
+if R1 == 0 goto 7
+R1--
+R5++
+goto 3
+if R5 == 0 goto 12
+R5--
 R4++
-R20++
-goto 117
-goto 1
+R1++
+goto 7
+; _HELPERREGISTER_1[R4]++
+R4++
+R2 = 0
+if R4 == 0 goto 18
+R4--
+R6++
+goto 14
+if R6 == 0 goto 23
+R6--
+R2++
+R4++
+goto 18
 ; ##############
