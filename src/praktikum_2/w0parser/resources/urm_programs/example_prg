@@ -12,3 +12,13 @@ while H1 != X1 do begin
 	H1 = H1 + 1
 
 end
+
+
+
+
+
+
+MULT(in X1; out Y);
+var(H1);
+H1 = 0;
+Y = X1 + 1

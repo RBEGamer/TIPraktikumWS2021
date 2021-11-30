@@ -187,6 +187,7 @@ public class URMBuilder {
     }
 
     public void while_end() {//throws URMExceptions {
+        program_lines.add(String.format("; WHILE END"));
         //REPLACE MARKE
         if(while_lut.size() <= 2){
             //throw new URMExceptions("WHILE NOT BE STARTED");
