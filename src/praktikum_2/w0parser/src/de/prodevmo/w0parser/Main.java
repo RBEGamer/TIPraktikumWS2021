@@ -48,12 +48,12 @@ public class Main {
         final File folder = new File(BASE_PATH);
         listFilesForFolder(folder);
 
-        for (File f : folder.listFiles()) {
-      //      run_wh0program(f.getPath(), URM_OUT_BASE_PATH);
-        }
+        //for (File f : folder.listFiles()) {
+        //    run_wh0program(f.getPath(), URM_OUT_BASE_PATH);
+        //}
 
 
-        run_wh0program(BASE_PATH +  "test0.wh0", URM_OUT_BASE_PATH);
+        run_wh0program(BASE_PATH +  "mult.wh0", URM_OUT_BASE_PATH);
         //run_wh0program(BASE_PATH +  "test1.wh0");
         //run_wh0program(BASE_PATH +  "test2_err.wh0");
 

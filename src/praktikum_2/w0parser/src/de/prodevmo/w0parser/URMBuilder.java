@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 
 public class URMBuilder {
@@ -16,6 +17,7 @@ public class URMBuilder {
     private int used_register_index = 0;
     private int used_helper_register_index = 0;
     private ArrayList<String> program_lines = new ArrayList<String>();
+    private Stack<Integer> while_lut = new Stack<Integer>();
     final String REGISTER_PREFIX = "R";
 
 
@@ -85,7 +87,7 @@ public class URMBuilder {
     }
 
 
-    private int get_next_line_number()
+    private Integer get_next_line_number()
     {
         int line_number = 1;
         for(String line : program_lines)
@@ -155,11 +157,50 @@ public class URMBuilder {
     }
 
     public void while_begin(String _l_ident, String _r_ident, URMTypeDef.WHILE_TYPE _type){
-        //STORE WHILE BEGIN SPRUNGMARKE
+
+        program_lines.add(String.format("; WHILE NOT EQUAL WHILE %s[%s] != %s[%s] do begin",_l_ident, idents_name.get(_l_ident), _r_ident,idents_name.get(_l_ident)));
+        //REGISTER TWO HELPER REGISTER
+        final String l_copy_reg = get_next_free_helper_register();
+        final String r_copy_reg = get_next_free_helper_register();
+        reg_reg(l_copy_reg);
+        reg_reg(r_copy_reg);
+
+        final int copy_base_line = get_next_line_number();
+        copy_register_value(idents_name.get(l_copy_reg), idents_name.get(_l_ident));
+        copy_register_value(idents_name.get(r_copy_reg), idents_name.get(_r_ident));
+
+        int compare_l_copy_reg = get_next_line_number();
+        program_lines.add(String.format("if %s == 0 goto %s", idents_name.get(l_copy_reg), compare_l_copy_reg + 2));
+        program_lines.add(String.format("goto %s", compare_l_copy_reg + 4));
+
+        // We only need the index of the program to replace the <?? > with the next command after the while.
+        while_lut.push(program_lines.size());
+        program_lines.add(String.format("if %s == 0 goto _WHNE_", idents_name.get(r_copy_reg)));
+        program_lines.add(String.format("goto %s", compare_l_copy_reg + 8));
+        program_lines.add(String.format("if %s == 0 goto %s", idents_name.get(r_copy_reg), compare_l_copy_reg + 8));
+        program_lines.add(String.format("%s--", idents_name.get(l_copy_reg)));
+        program_lines.add(String.format("%s--", idents_name.get(r_copy_reg)));
+        program_lines.add(String.format("goto %d", compare_l_copy_reg));
+
+
+        while_lut.push(copy_base_line);
     }
 
-    public void while_end(){
+    public void while_end() {//throws URMExceptions {
         //REPLACE MARKE
+        if(while_lut.size() <= 2){
+            //throw new URMExceptions("WHILE NOT BE STARTED");
+        }
+
+        final Integer jmp_copy = while_lut.pop();
+        final Integer jmp_end_line_index = while_lut.pop();
+
+        program_lines.add("goto " + jmp_copy.toString());
+
+
+        String while_replace_line = program_lines.get(jmp_end_line_index);
+        while_replace_line = while_replace_line.replace("_WHNE_", get_next_line_number().toString());
+        program_lines.set(jmp_end_line_index, while_replace_line);
     }
 
 
